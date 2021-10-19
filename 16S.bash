@@ -68,9 +68,3 @@ vsearch --usearch_global 8.all.ASV_metaxa.fasta --db $TAX --id 0.97 --maxaccepts
 vsearch --usearch_global 8.all.OTU_metaxa.fasta --db $TAX --id 0.97 --maxaccepts 0 --maxrejects 0 --uc_allhits --uc 9.all.OTU_tax.lca.uc --lca_cutoff 0.9 --lcaout 9.all.OTU_tax.lca.txt --threads $T # assign taxonomy with LCA
 cat 9.all.ASV_tax.lca.txt | sort -n -k1.4 | sed 's/,/\t/g' | sed '1 i\ASV\tdomain\tphylum\tclass\torder\tfamily\tgenus\tspecies' > 9.all.ASV_tax.lca.rf.txt # reformat taxonomy
 cat 9.all.OTU_tax.lca.txt | sort -n -k1.4 | sed 's/,/\t/g' | sed '1 i\OTU\tdomain\tphylum\tclass\torder\tfamily\tgenus\tspecies' > 9.all.OTU_tax.lca.rf.txt # reformat taxonomy
-
-# FAPROTAX ASSIGNMENT
-cat 9.all.ASV_tax.sintax.txt | sort -n -k1.4 | awk '{print $1 "\t" $4}' | sed '1 i\ASV\ttaxonomy' > 9.all.ASV_tax.sintax.faprotax.txt # prepare taxonomy for faprotax
-collapse_table.py -i 9.all.ASV_tax.sintax.faprotax.txt -g /databases/FAPROTAX.txt --out_groups2records_table_dense 9.all.ASV_tax.sintax.faprotax.assign.txt -r 9.all.ASV_tax.sintax.faprotax.groups.txt -d "taxonomy" --omit_columns 0 # run faprotax
-sed -i '1,12d' 9.all.ASV_tax.sintax.faprotax.assign.txt # delete trailing lines
-paste <(awk '{print $1 "\t" $2}' 9.all.ASV_tax.sintax.faprotax.txt) <(awk '{print $2}' 9.all.ASV_tax.sintax.faprotax.assign.txt) > 9.all.ASV_tax.sintax.faprotax.guilds.txt
