@@ -5,7 +5,6 @@ Pipelines for the analysis of metabarcoding datasets derived from Illumina paire
 The pipelines include the following general steps.
 1) Specify primers and databases
 2) File formatting
-3) QC
-4) Quality control (phiX removal, primer trimming, PE merging, quality filtering, chimera removal, target verification)
-5) Delineation into both ASVs and OTUs
-6) Taxonomic classification against the UNITE database
+3) Quality control (phiX removal, primer trimming, PE merging, quality filtering, chimera removal, target verification)
+4) Delineation into both ASVs and OTUs
+5) Taxonomic classification against the UNITE database
